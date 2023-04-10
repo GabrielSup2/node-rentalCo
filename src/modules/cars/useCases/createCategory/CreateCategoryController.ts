@@ -6,11 +6,11 @@ class CreateCategoryController {
 
     }
 
- handle(req : Request, res : Response): Response{
+ async handle(req : Request, res : Response): Promise<Response>{
     const { name, description } = req.body;
 
     
-    this.createCategoryUseCase.execute({name, description})
+    await this.createCategoryUseCase.execute({name, description})
 
    return  res.status(201).send("Categories saved ");
 }

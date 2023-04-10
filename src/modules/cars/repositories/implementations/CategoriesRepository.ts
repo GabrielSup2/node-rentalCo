@@ -1,40 +1,43 @@
-import { Category } from "../../model/category";
+import { Category } from "../../entities/category";
 import {
     ICategoriesRepository,
     ICreateCategoryDTO,
 } from "../ICategoriesRepository";
+import { Repository, getRepository } from "typeorm";
 
 export class CategoriesRepository implements ICategoriesRepository {
-    private categories: Category[];
+    private repository: Repository<Category>;
 
-    private static INSTANCE: CategoriesRepository;
+    
 
-    private constructor() {
-        this.categories = [];
+     constructor() {
+        this.repository = getRepository(Category);
     }
 
-    public static getInstance(): CategoriesRepository {
-        if (!CategoriesRepository.INSTANCE) {
-            CategoriesRepository.INSTANCE = new CategoriesRepository();
-        }
-        return CategoriesRepository.INSTANCE;
+    // public static getInstance(): CategoriesRepository {
+    //     if (!CategoriesRepository.INSTANCE) {
+    //         CategoriesRepository.INSTANCE = new CategoriesRepository();
+    //     }
+    //     return CategoriesRepository.INSTANCE;
+    // }
+
+    async create({ name, description }: ICreateCategoryDTO): Promise<void> {
+        const category = this.repository.create({
+            description,
+            name,
+        });
+
+        await this.repository.save(category);
     }
 
-    create({ name, description }: ICreateCategoryDTO): void {
-        const category = new Category();
-
-        Object.assign(category, { name, description, created_at: new Date() });
-
-        this.categories.push(category);
+    async list(): Promise<Category[]> {
+        const categories = this.repository.find();
+        return categories
     }
 
-    list(): Category[] {
-        return this.categories;
-    }
-
-    findCategory(name: string) {
-        const categoryFound = this.categories.find(
-            (categorie) => categorie.name === name
+    async findCategory(name: string): Promise<Category> {
+        const categoryFound = await  this.repository.findOne(
+         {name}
         );
         return categoryFound;
     }
