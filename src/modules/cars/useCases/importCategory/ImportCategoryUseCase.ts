@@ -2,14 +2,18 @@ import fs from "fs";
 import { parse as csvParse } from "csv-parse";
 import { ICategoriesRepository } from "../../repositories/ICategoriesRepository";
 import { Multer } from "multer";
+import {injectable, inject} from 'tsyringe'
 
 interface IImportCategory {
     name: string;
     description: string;
 }
 
+@injectable()
 class ImportCategoryUseCase {
-    constructor(private categoriesRepository: ICategoriesRepository) {}
+    constructor(
+        @inject("CategoriesRepository")
+        private categoriesRepository: ICategoriesRepository) {}
 
     loadCategories(file: Express.Multer.File): Promise<IImportCategory[]> {
         return new Promise((resolve, reject) => {
@@ -20,14 +24,14 @@ class ImportCategoryUseCase {
             parseFile
                 .on("data", async (line) => {
                     const [name, description] = line;
-                    categories.push({ name, description });
+                   await categories.push({ name, description });
                 })
-                .on("end", () => {
-                    fs.promises.unlink(file.path)
+                .on("end", async() => {
+                    await fs.promises.unlink(file.path)
                     resolve(categories);
                 })
-                .on("error", (error) => {
-                    reject(error);
+                .on("error", async (error) => {
+                    await reject(error);
                 });
         });
     }
@@ -36,9 +40,9 @@ class ImportCategoryUseCase {
         const categories = await this.loadCategories(file);
         categories.map( async category =>{
             const {name, description} = category
-            const existsCategory = this.categoriesRepository.findCategory
+            const existsCategory =await  this.categoriesRepository.findCategory
             if(!existsCategory){
-                this.categoriesRepository.create({
+               await  this.categoriesRepository.create({
                     name, description
                 })
             }
