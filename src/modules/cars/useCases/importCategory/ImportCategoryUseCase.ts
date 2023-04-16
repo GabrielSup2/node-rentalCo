@@ -3,6 +3,7 @@ import { parse as csvParse } from "csv-parse";
 import { ICategoriesRepository } from "../../repositories/ICategoriesRepository";
 import { Multer } from "multer";
 import {injectable, inject} from 'tsyringe'
+import "reflect-metadata"
 
 interface IImportCategory {
     name: string;

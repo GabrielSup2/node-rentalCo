@@ -78,7 +78,73 @@
                     }
                 }
             }
+        },
+        "/categories/import": {
+            "posts ": {
+                "tags":["Category"],
+                "summary" : "Upload a new category",
+                "requestBody": {
+                    "content" : {
+                        "multipart/form-data" : {
+                            "schema" : {
+                                "type" :"object",
+                                "properties" : {
+                                    "type" : "string",
+                                    "form" : "binary"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201" : {
+                        "description": "Created"
+                    }
+
+                }
+            }
+
+        },
+        "/specification" :{
+            "post" : {
+                "tags" : ["Specifications"],
+                "summary" :"Create a specification",
+                "description " :"Create a new specification",
+                "requestBody" :{
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "$ref" : "#/definition/Specifications"
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "201" : {
+                        "description" : "Created"
+                   },
+                   "500" : {
+                    "description" :"Specification already exists"
+                   }
+                }
+            }
         }
-    }}
+
+    },
+    "definitions " : {
+        "Specifications" : {
+            "type" : "object",
+            "properties" : {
+                "name": {
+                    "type" :"string"
+                },
+                "description" : {
+                    "type" : "string"
+                }
+            }
+        }
+
+    }
+}
     
 

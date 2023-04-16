@@ -1,12 +1,14 @@
+import "reflect-metadata"
+import { Category } from "../../entities/Category";
 
-import { Category } from "../../entities/category";
+import  dataSource  from "../../../../database/index";
 import {
     ICategoriesRepository,
     ICreateCategoryDTO,
 } from "../ICategoriesRepository";
 
 
-import { Repository, getRepository } from "typeorm";
+import { Repository} from "typeorm";
 
 export class CategoriesRepository implements ICategoriesRepository {
     private repository: Repository<Category>;
@@ -14,7 +16,7 @@ export class CategoriesRepository implements ICategoriesRepository {
     
 
      constructor() {
-        this.repository = getRepository(Category);
+        this.repository = dataSource.getRepository(Category);
     }
 
     // public static getInstance(): CategoriesRepository {
@@ -34,12 +36,12 @@ export class CategoriesRepository implements ICategoriesRepository {
     }
 
     async list(): Promise<Category[]> {
-        const categories = this.repository.find();
+        const categories = await this.repository.find();
         return categories
     }
 
     async findCategory(name: string): Promise<Category> {
-        const categoryFound = await  this.repository.findOne(
+        const categoryFound = await  this.repository.findOneBy(
          {name}
         );
         return categoryFound;

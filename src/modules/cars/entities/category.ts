@@ -1,7 +1,8 @@
+import "reflect-metadata"
 import { v4 as uuidV4, v4 } from "uuid";
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
 
-@Entity("categories")
+@Entity("Category")
 class Category {
     @PrimaryColumn()
     id?: string;

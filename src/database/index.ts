@@ -1,13 +1,26 @@
-import { createConnection, getConnectionOptions } from 'typeorm';
+import { DataSource } from "typeorm";
+import "reflect-metadata"
+import { Specification } from "../../src/modules/cars/entities/Specification";
+import { Category } from "../modules/cars/entities/Category";
 
-interface IOptions {
-  host: string;
-}
+import { CreateCategory1680962623233 } from "./migrations/1680962623233-CreateCategory";
+import { CreateSpecification1681315081361 } from "./migrations/1681315081361-CreateSpecification";
+const dataSource = new DataSource({
+    type: "postgres",
+    port: 5432,
+    username: "docker",
+    password: "ignite",
+    database: "rentx",
+    entities: [ "./src/modules/**/entities/*.ts"],
+    migrations: [
+        CreateCategory1680962623233,
+        CreateSpecification1681315081361
 
-getConnectionOptions().then(options => {
-  const newOptions = options as IOptions;
-  newOptions.host = 'database'; //Essa opção deverá ser EXATAMENTE o nome dado ao service do banco de dados
-  createConnection({
-    ...options,
+    ],
   });
-});
+  
+  export function createConnection(host = "database"): Promise<DataSource> {
+    return dataSource.setOptions({ host }).initialize();
+  }
+  
+  export default dataSource;
