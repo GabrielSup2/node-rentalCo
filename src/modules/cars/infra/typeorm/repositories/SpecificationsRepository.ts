@@ -1,11 +1,11 @@
 import "reflect-metadata";
-import { Specification } from "../../entities/Specification";
+import { Specification } from "../entities/Specification";
 import { Repository } from "typeorm";
-import dataSource from "../../../../database/index";
+import dataSource from "../../../../../shared2/infra/typeorm/index";
 import {
     ISpecificationRepository,
     ICreateEspecificationDTO,
-} from "../ISpecificationRepository";
+} from "../../../repositories/ISpecificationRepository";
 
 export class SpecificationsRepository implements ISpecificationRepository {
     private repository: Repository<Specification>;

@@ -5,7 +5,7 @@ interface ICreateUsersDTO{
     email :string;
     driver_license : string;
     id? : string,
-    avatar : string
+    avatar ?: string
 }
 
 export {ICreateUsersDTO}

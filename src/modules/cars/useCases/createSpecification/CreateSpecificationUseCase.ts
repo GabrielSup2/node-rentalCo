@@ -1,7 +1,7 @@
 import { inject, injectable } from "tsyringe";
-import { ISpecificationRepository } from "../../repositories/ISpecificationRepository";
+import { ISpecificationRepository } from "@modules/cars/repositories/ISpecificationRepository";
 import "reflect-metadata"
-import { AppError } from "errors/AppError";
+import { AppError } from "@errors/AppError";
 interface Irequest {
     name: string;
     description: string;

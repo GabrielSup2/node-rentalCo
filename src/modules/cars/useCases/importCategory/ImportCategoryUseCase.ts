@@ -1,6 +1,6 @@
 import fs from "fs";
 import { parse as csvParse } from "csv-parse";
-import { ICategoriesRepository } from "../../repositories/ICategoriesRepository";
+import { ICategoriesRepository } from "@modules/cars/repositories/ICategoriesRepository";
 import { Multer } from "multer";
 import {injectable, inject} from 'tsyringe'
 import "reflect-metadata"

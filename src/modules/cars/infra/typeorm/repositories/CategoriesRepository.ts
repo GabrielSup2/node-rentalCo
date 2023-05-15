@@ -1,11 +1,11 @@
 import "reflect-metadata"
-import { Category } from "../../entities/Category";
+import { Category } from "../entities/Category";
 
-import  dataSource  from "../../../../database/index";
+import  dataSource  from "../../../../../shared2/infra/typeorm/index";
 import {
     ICategoriesRepository,
     ICreateCategoryDTO,
-} from "../ICategoriesRepository";
+} from "../../../repositories/ICategoriesRepository";
 
 
 import { Repository} from "typeorm";

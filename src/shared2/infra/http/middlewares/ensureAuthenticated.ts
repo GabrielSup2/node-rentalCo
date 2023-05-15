@@ -1,8 +1,8 @@
 import { compare } from "bcrypt";
 import { verify } from "jsonwebtoken";
-import { AppError } from "errors/AppError";
+import { AppError } from "@errors/AppError";
 import { NextFunction, Request, Response} from "express";
-import { UserRepository } from "modules/accounts/repositories/implementations/UsersRepository";
+import { UserRepository } from "@modules/accounts/infra/typeorm/repositories/UsersRepository";
 
 interface IPayload {
     sub : string;

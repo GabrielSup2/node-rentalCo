@@ -1,4 +1,4 @@
-import { User } from "modules/accounts/entities/User";
+import { User } from "@modules/accounts/infra/typeorm/entities/User";
 import { Repository } from "typeorm";
 import { hash } from "bcrypt";
 import { injectable, inject } from "tsyringe";
