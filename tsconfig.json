@@ -10,7 +10,7 @@
         },
 
         "target": "es2016",
-
+        "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
 
         "module": "CommonJS",

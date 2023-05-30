@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --poll --ignore-watch node_modules --respawn src/shared2/infra/http/server.ts",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js -d ./src/shared2/infra/typeorm/index.ts",
-    "test": "jest"
+    "test": "jest",
+    "seed:admin": "ts-node-dev src/shared2/infra/type/seed/admin.ts"
   },
   "engines": {
     "node": ">=14"

@@ -8,6 +8,6 @@ RUN npm install -g ts-node-dev
 
 COPY . .
 
-EXPOSE 3335
+EXPOSE 3330
 
 CMD ["npm", "run", "dev"]

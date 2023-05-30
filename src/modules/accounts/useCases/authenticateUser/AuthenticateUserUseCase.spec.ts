@@ -15,7 +15,7 @@ describe("Authenticate user", ()=>{
         createUserUsecase = new CreateUserUseCase(usersRepositoryInMemory)
     })
 
-    it("Should be able to create a new user", ()=>{
+    it("Should be able to authenticated a registered user", ()=>{
         const user : ICreateUsersDTO = {
             username: "UserName teste",
             email: "UserTest@teste.com",

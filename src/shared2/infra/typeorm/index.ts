@@ -11,15 +11,19 @@ const dataSource = new DataSource ({
     username: "docker",
     password: "ignite",
     database: "rentx",
-    entities: ["./src/modules/**/entities/*.ts"],
-    migrations: ["./src/database/migrations/**/*.ts"],
-  
+    entities: ["./src/modules/infra/typeorm/**/entities/*.ts"],
+    migrations: ["./src/shared2/infra/typeorm/migrations/**/*.ts"],
+    
     
 
 });
 
 export function createConnection(host = "database"): Promise<DataSource> {
-    return dataSource.setOptions({ host }).initialize();
+    return dataSource.setOptions({ host }).initialize()
 }
 
+
+
 export default dataSource;
+
+

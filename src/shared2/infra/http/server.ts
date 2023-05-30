@@ -2,7 +2,7 @@ import "reflect-metadata";
 import express, { NextFunction, Request, Response } from "express";
 import "express-async-errors";
 import swaggerUi from "swagger-ui-express";
-import "../typeorm/index";
+import "@shared/infra/typeorm/index";
 import "../../container/index";
 import { router } from "./routes";
 import swaggerFile from "../../../swagger.json";
@@ -27,6 +27,6 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     });
 });
 
-app.listen(3335, () => {
+app.listen(3330, () => {
     console.log("Server is running");
 });

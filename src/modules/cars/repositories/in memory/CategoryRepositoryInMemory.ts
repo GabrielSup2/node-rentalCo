@@ -5,7 +5,7 @@ import {
 } from "modules/cars/repositories/ICategoriesRepository";
 
 class CategoryRepositoryInMemory implements ICategoriesRepository {
-    private categories: Category[];
+    private categories: Category[] = []
 
    
 
